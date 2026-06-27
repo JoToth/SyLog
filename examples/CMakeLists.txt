@@ -1,0 +1,11 @@
+function(sylog_add_example name source)
+  add_executable(${name} ${source})
+  target_link_libraries(${name} PRIVATE SyLog)
+  target_compile_features(${name} PRIVATE cxx_std_20)
+  sylog_apply_options(${name})
+endfunction()
+
+sylog_add_example(SyLogExampleBasic basic.cpp)
+sylog_add_example(SyLogExampleAsyncWorkers async_workers.cpp)
+sylog_add_example(SyLogExampleCustomSeverity custom_severity.cpp)
+sylog_add_example(SyLogExampleRouting routing.cpp)

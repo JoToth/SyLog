@@ -1,0 +1,4 @@
+add_executable(SyLogBenchmarks sylog_bench.cpp)
+target_link_libraries(SyLogBenchmarks PRIVATE SyLog argtree::argtree)
+target_compile_features(SyLogBenchmarks PRIVATE cxx_std_20)
+sylog_apply_options(SyLogBenchmarks)

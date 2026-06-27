@@ -1,0 +1,45 @@
+# Build outputs
+/build/
+/out/
+/cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+CTestTestfile.cmake
+Testing/
+_deps/
+
+# Binaries and libraries
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.pdb
+*.ilk
+*.obj
+*.o
+*.gcda
+*.gcno
+
+# Benchmark/runtime artifacts
+sylog-bench-*.log
+*.log
+*.tmp
+
+# IDE/editor
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.swp
+*.swn
+.DS_Store
+
+# Package artifacts
+*.zip
+*.tar.gz
+*.tgz

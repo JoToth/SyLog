@@ -1,0 +1,13 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+if(NOT TARGET Workers::Workers)
+  find_dependency(Workers CONFIG QUIET)
+endif()
+
+if(NOT TARGET Workers::Workers)
+  message(FATAL_ERROR "SyLog requires Workers::Workers. Install the Workers dependency or consume SyLog through its cppdeps workflow.")
+endif()
+
+include("${CMAKE_CURRENT_LIST_DIR}/SyLogTargets.cmake")

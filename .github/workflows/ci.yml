@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  linux:
+    name: Linux GCC
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install tools
+        run: sudo apt-get update && sudo apt-get install -y ninja-build cmake g++ git
+      - name: Configure
+        run: cmake -S . -B build -G Ninja -DSYLOG_BUILD_TESTS=ON -DSYLOG_BUILD_EXAMPLES=ON -DSYLOG_BUILD_BENCHMARKS=ON
+      - name: Build
+        run: cmake --build build
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+      - name: Install smoke test
+        run: cmake --install build --prefix install
+
+  windows-msys2:
+    name: Windows MSYS2 UCRT64
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: >-
+            git
+            mingw-w64-ucrt-x86_64-gcc
+            mingw-w64-ucrt-x86_64-cmake
+            mingw-w64-ucrt-x86_64-ninja
+      - name: Configure
+        run: cmake -S . -B build -G Ninja -DSYLOG_BUILD_TESTS=ON -DSYLOG_BUILD_EXAMPLES=ON -DSYLOG_BUILD_BENCHMARKS=ON
+      - name: Build
+        run: cmake --build build
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+
+  windows-msvc:
+    name: Windows MSVC
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S . -B build -DSYLOG_BUILD_TESTS=ON -DSYLOG_BUILD_EXAMPLES=ON -DSYLOG_BUILD_BENCHMARKS=ON
+      - name: Build
+        run: cmake --build build --config Release
+      - name: Test
+        run: ctest --test-dir build -C Release --output-on-failure
+      - name: Install smoke test
+        run: cmake --install build --config Release --prefix install
