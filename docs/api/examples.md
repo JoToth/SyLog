@@ -1,6 +1,7 @@
 # Examples
 
-The `examples/` directory contains small, buildable programs that show the public API.
+The `examples/` directory contains small, buildable programs that show the public
+API.
 
 | Target | Source | Purpose |
 |---|---|---|
@@ -15,3 +16,12 @@ Build all examples:
 cmake -S . -B build -DSYLOG_BUILD_EXAMPLES=ON
 cmake --build build
 ```
+
+Build one example:
+
+```sh
+cmake --build build --target SyLogExampleBasic
+```
+
+Examples are smoke tests for the public API surface. Keep them short and avoid
+showing internal test-only helpers.

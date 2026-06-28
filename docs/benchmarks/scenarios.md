@@ -3,7 +3,7 @@
 `SyLogBenchmarks` is a diagnostic tool. It is scenario-based because one global
 `events/sec` number is misleading for an async logger. Observed performance
 depends on producer contention, route count, renderer cost, sink cost, queue
-capacity and drop/block policy.
+capacity, and drop/block policy.
 
 ## CLI
 
@@ -68,4 +68,9 @@ Submits a burst and then measures graceful drain time with block policy.
 | `end_to_end_consumed_per_sec` | Sink-observed rate over total scenario time. |
 | `enqueue_latency_ns p50/p95/p99` | Sampled producer-side call latency. |
 
-Interpret results as workload diagnostics, not absolute product claims.
+## Reading results
+
+Interpret results as workload diagnostics, not absolute product claims. For
+release notes, record the full command line, compiler, build type, CPU, OS, and
+filesystem. Compare scenario-to-scenario trends from the same machine before
+making performance claims.
