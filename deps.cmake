@@ -8,7 +8,7 @@ cppdeps_add(
   NAME workers
   PROVIDES Workers::Workers
   GIT_REPOSITORY https://github.com/JoToth/workers.git
-  TAG v1.0
+  TAG v0.1.0-preview
   BUILD CMAKE_ADD_SUBDIRECTORY
   BUILD_TARGET Workers
 )
